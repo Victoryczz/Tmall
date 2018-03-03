@@ -13,4 +13,8 @@
     <select id="total" resultType="int">
         SELECT count(*) FROM category
     </select>
+    <!--keyProperty和useGeneratedKay一般成对使用，获取插入对象自增主键，keyProperty是java对象的属性名-->
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Category">
+        INSERT INTO category (name) VALUES (#{name})
+    </insert>
 </mapper>

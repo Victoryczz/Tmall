@@ -13,5 +13,7 @@ public interface CategoryMapper {
     List<Category> list(Page page);
     //查询分类个数
      int total();
+     //新增分类
+    void add(Category category);
 
 }

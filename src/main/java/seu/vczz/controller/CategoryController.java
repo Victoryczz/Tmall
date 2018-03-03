@@ -6,8 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import seu.vczz.pojo.Category;
 import seu.vczz.service.CategoryService;
+import seu.vczz.util.ImageUtil;
 import seu.vczz.util.Page;
+import seu.vczz.util.UploadedImageFile;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,4 +43,22 @@ public class CategoryController {
         return "admin/listCategory";
     }
 
+    /**
+     * 添加分类
+     */
+    @RequestMapping("admin_category_add")
+    public String add(Category category, HttpSession session, UploadedImageFile uploadedImageFile) throws IOException {
+        //添加分类
+        categoryService.add(category);
+        //获得运行时环境路径，放置上传图片文件
+        File imageFolder = new File(session.getServletContext().getRealPath("img/category"));
+        //图片以分类名称命名
+        File file = new File(imageFolder, category.getId()+".jpg");
+        if (!file.getParentFile().exists())
+            file.getParentFile().mkdirs();
+        uploadedImageFile.getImage().transferTo(file);
+        BufferedImage image = ImageUtil.change2jpg(file);
+        ImageIO.write(image, "jpg", file);
+        return "redirect:/admin_category_list";
+    }
 }

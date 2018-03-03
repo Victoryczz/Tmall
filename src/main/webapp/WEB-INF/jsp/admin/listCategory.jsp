@@ -29,6 +29,7 @@
     <title>分类管理</title>
 </head>
 <body>
+<div class="workingArea">
 <div class="listDataTableDiv">
     <table class="table table-striped table-bordered table-hover table-condensed">
         <thead>
@@ -65,7 +66,8 @@
 <div class="panel panel-warning addDiv">
     <div class="panel-heading">新增分类</div>
     <div class="panel-body">
-        <form method="post" id="addForm" action="/admin_category_add" enctype="multipart/form-data">
+        <!--上传文件时必须使用enctype="multipart/form-data",为了保证中文，使用了post方式提交-->
+        <form method="post" id="addForm" action="admin_category_add" enctype="multipart/form-data">
             <table class="addTable">
                 <tr>
                     <td>分类名称</td>
@@ -73,18 +75,18 @@
                 </tr>
                 <tr>
                     <td>分类图片</td>
-                    <td><<input id="categoryPic" accept="image/*" type="file" name="image"/></td>
+                    <td><input id="categoryPic" accept="image/*" type="file" name="image"/></td>
                 </tr>
                 <tr class="submitTR">
                     <td colspan="2" align="center">
-                        <button type="submit" class="btn btn-success">提交</button>
+                        <button type="submit" class="btn btn-success">提  交</button>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
-
+</div>
 <%@include file="../include/admin/adminFooter.jsp"%>
 </body>
 </html>

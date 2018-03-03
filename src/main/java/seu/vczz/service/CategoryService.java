@@ -14,4 +14,6 @@ public interface CategoryService {
 
     int total();
 
+    void add(Category category);
+
 }
