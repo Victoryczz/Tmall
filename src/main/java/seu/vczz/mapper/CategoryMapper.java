@@ -15,5 +15,7 @@ public interface CategoryMapper {
      int total();
      //新增分类
     void add(Category category);
+    //删除
+    void delete(int id);
 
 }

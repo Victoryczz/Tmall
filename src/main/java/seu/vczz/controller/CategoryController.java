@@ -61,4 +61,19 @@ public class CategoryController {
         ImageIO.write(image, "jpg", file);
         return "redirect:/admin_category_list";
     }
+
+    /**
+     * 删除分类
+     */
+    @RequestMapping("admin_category_delete")
+    public String delete(int id, HttpSession session){
+        categoryService.delete(id);
+        //删除图片文件
+        File imageFolder = new File(session.getServletContext().getRealPath("img/category"));
+        File file = new File(imageFolder, id+"jpg");
+        file.delete();
+
+        return "redirect:/admin_category_list";
+
+    }
 }
