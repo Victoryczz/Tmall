@@ -47,6 +47,7 @@
             <c:forEach items="${categories}" var="c">
                 <tr>
                     <td>${c.id}</td>
+                    <!--根据图片的id来获取图片-->
                     <td><img height="40px" src="img/category/${c.id}.jpg"></td>
                     <td>${c.name}</td>
                     <td><a href="admin_property_list?cid=${c.id}"><span class="glyphicon glyphicon-th-list"></span> </a> </td>
