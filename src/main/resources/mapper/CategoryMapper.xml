@@ -6,13 +6,16 @@
 <mapper namespace="seu.vczz.mapper.CategoryMapper">
     <select id="list" resultType="Category">
         SELECT * FROM category ORDER BY id DESC
-        <if test="start!=null and count!=null">
+    <!--    <if test="start!=null and count!=null">
             limit #{start},#{count}
         </if>
+        -->
     </select>
+    <!--改用分页插件来做
     <select id="total" resultType="int">
         SELECT count(*) FROM category
     </select>
+    -->
     <!--keyProperty和useGeneratedKay一般成对使用，获取插入对象自增主键，keyProperty是java对象的属性名-->
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Category">
         INSERT INTO category (name) VALUES (#{name})

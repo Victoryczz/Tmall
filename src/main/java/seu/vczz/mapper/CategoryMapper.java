@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface CategoryMapper {
     //查询所有分类
-    List<Category> list(Page page);
+    List<Category> list();
     //查询分类个数
-     int total();
+     //int total();
      //新增分类
     void add(Category category);
     //删除

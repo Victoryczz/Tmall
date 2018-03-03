@@ -1,5 +1,8 @@
 package seu.vczz.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +15,6 @@ import seu.vczz.util.Page;
 import seu.vczz.util.UploadedImageFile;
 
 import javax.imageio.ImageIO;
-import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,9 +32,9 @@ public class CategoryController {
     CategoryService categoryService;
 
     /**
-     * 展示分类
+     * 展示分类,使用分页插件
      */
-    @RequestMapping("admin_category_list")
+    /*@RequestMapping("admin_category_list")
     public String list(Model model, Page page){
         //获取分类
         List<Category> categories = categoryService.list(page);
@@ -43,8 +45,19 @@ public class CategoryController {
         model.addAttribute("categories", categories);
         model.addAttribute("page", page);
         return "admin/listCategory";
+    }*/
+    @RequestMapping("admin_category_list")
+    public String list(Model model, Page page){
+        //分页插件
+        PageHelper.offsetPage(page.getStart(), page.getCount());
+        List<Category> categories = categoryService.list();
+        //获得全部数量
+        int total = (int) new PageInfo<>(categories).getTotal();
+        page.setTotal(total);
+        model.addAttribute("categories", categories);
+        model.addAttribute("page", page);
+        return "admin/listCategory";
     }
-
     /**
      * 添加分类
      */
