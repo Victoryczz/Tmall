@@ -1,25 +1,21 @@
 package seu.vczz.mapper;
 
-import seu.vczz.pojo.Category;
-import seu.vczz.util.Page;
-
 import java.util.List;
+import seu.vczz.pojo.Category;
+import seu.vczz.pojo.CategoryExample;
 
-/**
- * CREATE by vczz on 2018/3/1
- */
 public interface CategoryMapper {
-    //查询所有分类
-    List<Category> list();
-    //查询分类个数
-     //int total();
-     //新增分类
-    void add(Category category);
-    //删除
-    void delete(int id);
-    //获取
-    Category get(int id);
-    //修改
-    void update(Category category);
+    int deleteByPrimaryKey(Integer id);
 
+    int insert(Category record);
+
+    int insertSelective(Category record);
+
+    List<Category> selectByExample(CategoryExample example);
+
+    Category selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Category record);
+
+    int updateByPrimaryKey(Category record);
 }

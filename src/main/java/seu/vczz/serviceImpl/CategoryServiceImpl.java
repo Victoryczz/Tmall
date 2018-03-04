@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import seu.vczz.mapper.CategoryMapper;
 import seu.vczz.pojo.Category;
+import seu.vczz.pojo.CategoryExample;
 import seu.vczz.service.CategoryService;
 import seu.vczz.util.Page;
 
@@ -19,7 +20,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> list() {
-        return categoryMapper.list();
+        CategoryExample example = new CategoryExample();
+        example.setOrderByClause("id desc");
+        return categoryMapper.selectByExample(example);
     }
 
     /*@Override
@@ -29,21 +32,21 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void add(Category category) {
-        categoryMapper.add(category);
+        categoryMapper.insert(category);
     }
 
     @Override
     public void delete(int id) {
-        categoryMapper.delete(id);
+        categoryMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public Category get(int id) {
-        return categoryMapper.get(id);
+        return categoryMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public void update(Category category) {
-        categoryMapper.update(category);
+        categoryMapper.updateByPrimaryKeySelective(category);
     }
 }
